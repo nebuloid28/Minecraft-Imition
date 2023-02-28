@@ -5,8 +5,15 @@ using UnityEngine;
 // 작성자 : Ragu
 // 최초작성일 : 2023-02-27
 
+// 수정일 : 2023-02-28
+// faceChecks 정의
+// voxelTriangles, voxelUvs 수정(버텍스 6개 -> 4개)
+
 public class VoxelData : MonoBehaviour
 {
+    public static readonly int chunkWidth = 10;
+    public static readonly int chunkHeigth = 100;
+
     public static readonly Vector3[] voxelVertices = new Vector3[8]
     {
         /*
@@ -40,20 +47,20 @@ public class VoxelData : MonoBehaviour
         new Vector3(+1.0f,  0.0f,  0.0f), //RIght Face
     };
 
-    public static readonly int[,] voxelTriangles = new int[6, 6]
+    public static readonly int[,] voxelTriangles = new int[6, 4]
     {
         //버텍스의 순서는 LB-LT-RB -- RB-LT-RT
         //버텍스 인덱스가 시계방향인 이유 : 외적의 방향이 화면방향으로 향하게됨
 
-        {0, 3, 1, 1, 3, 2}, //Back Face
-        {5, 6, 4, 4, 6, 7}, //Front Face
-        {3, 7, 2, 2, 7, 6}, //Top Face
-        {1, 5, 0, 0, 5, 4}, //Bottom Face
-        {4, 7, 0, 0, 7, 3}, //Left Face
-        {1, 2, 5, 5, 2, 6}, //RIght Face
+        {0, 3, 1, 2}, //Back Face
+        {5, 6, 4, 7}, //Front Face
+        {3, 7, 2, 6}, //Top Face
+        {1, 5, 0, 4}, //Bottom Face
+        {4, 7, 0, 3}, //Left Face
+        {1, 2, 5, 6}, //RIght Face
     };
 
-    public static readonly Vector2[] voxelUv = new Vector2[6]
+    public static readonly Vector2[] voxelUv = new Vector2[4]
     {
         /*
          * voxelTris의 버텍스 인덱스 순서에 따른 UV좌표 데이터
@@ -66,9 +73,8 @@ public class VoxelData : MonoBehaviour
         new Vector2(0.0f, 0.0f), //LB
         new Vector2(0.0f, 1.0f), //LT
         new Vector2(1.0f, 0.0f), //RB
-
-        new Vector2(1.0f, 0.0f), //RB
-        new Vector2(0.0f, 1.0f), //LT
+        //new Vector2(1.0f, 0.0f), //RB
+        //new Vector2(0.0f, 1.0f), //LT
         new Vector2(1.0f, 1.0f), //RT
     };
 }
